@@ -43,4 +43,48 @@ MoviesSeries(movie_series_id) ON DELETE CASCADE
  FOREIGN KEY (movie_series_id) REFERENCES
 MoviesSeries(movie_series_id) ON DELETE CASCADE,
  FOREIGN KEY (tag_id) REFERENCES Tags(tag_id) ON DELETE CASCADE
-);
+);-- ProceduresCREATE PROCEDURE GetMovieReviews
+ @movie_series_id INT
+AS
+BEGIN
+ SELECT r.review_id, r.user_id, u.username, r.review_text, 
+r.review_date
+ FROM Reviews r
+ JOIN Users u ON r.user_id = u.user_id
+ WHERE r.movie_series_id = @movie_series_id
+ ORDER BY r.review_date DESC;
+END;
+
+CREATE PROCEDURE AddReview
+ @user_id INT,
+ @movie_series_id INT,
+ @review_text TEXT
+AS
+BEGIN
+ INSERT INTO Reviews (user_id, movie_series_id, review_text, 
+review_date)
+ VALUES (@user_id, @movie_series_id, @review_text, GETDATE());
+END;
+
+CREATE PROCEDURE GetTopRatedMovies
+ @top_count INT
+AS
+BEGIN
+ SELECT ms.movie_series_id, ms.title, AVG(r.rating) AS avg_rating
+ FROM MoviesSeries ms
+ JOIN Ratings r ON ms.movie_series_id = r.movie_series_id
+ GROUP BY ms.movie_series_id, ms.title
+ ORDER BY avg_rating DESC
+ OFFSET 0 ROWS FETCH NEXT @top_count ROWS ONLY;
+END;
+
+CREATE PROCEDURE GetMoviesByTag
+ @tag_name VARCHAR(50)
+AS
+BEGIN
+ SELECT ms.movie_series_id, ms.title, ms.genre, ms.release_date
+ FROM MoviesSeries ms
+ JOIN MovieSeriesTags mst ON ms.movie_series_id = mst.movie_series_id
+ JOIN Tags t ON mst.tag_id = t.tag_id
+ WHERE t.tag_name = @tag_name;
+END;
