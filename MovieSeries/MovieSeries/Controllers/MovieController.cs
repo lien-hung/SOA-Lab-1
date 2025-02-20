@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MovieSeries.CoreLayer.Entities;
 using MovieSeries.ServiceLayer.Services;
 
 namespace MovieSeries.Controllers
@@ -7,12 +8,20 @@ namespace MovieSeries.Controllers
     [Route("[controller]")]
     public class MovieController : ControllerBase
     {
-        private readonly MovieService _movieService;
+        private readonly IMovieService _movieService;
 
-        public MovieController(MovieService movieService)
+        public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
         }
+
+        [HttpPost("")]
+        public async Task<IActionResult> AddMovie(Movie movie)
+        {
+            await _movieService.AddMovieAsync(movie);
+            return Created();
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMovie(int id)

@@ -3,7 +3,7 @@ using MovieSeries.CoreLayer.Entities;
 
 namespace MovieSeries.DataAccessLayer
 {
-    public class MovieRepository
+    public class MovieRepository : IMovieRepository
     {
         private readonly AppDbContext _context;
 

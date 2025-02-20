@@ -5,9 +5,9 @@ namespace MovieSeries.ServiceLayer.Services
 {
     public class MovieService : IMovieService
     {
-        private readonly MovieRepository _movieRepository;
+        private readonly IMovieRepository _movieRepository;
 
-        public MovieService(MovieRepository movieRepository)
+        public MovieService(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }

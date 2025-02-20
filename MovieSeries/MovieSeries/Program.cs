@@ -1,10 +1,12 @@
 using MovieSeries.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
+using MovieSeries.ServiceLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
