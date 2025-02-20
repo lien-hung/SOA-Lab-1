@@ -14,7 +14,9 @@ CREATE TABLE MoviesSeries (
  genre VARCHAR(50),
  release_date DATE,
  description TEXT
-);CREATE TABLE Reviews (
+);
+
+CREATE TABLE Reviews (
  review_id INT PRIMARY KEY IDENTITY,
  user_id INT NOT NULL,
  movie_series_id INT NOT NULL,
@@ -33,17 +35,24 @@ CREATE TABLE Ratings (
  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
  FOREIGN KEY (movie_series_id) REFERENCES
 MoviesSeries(movie_series_id) ON DELETE CASCADE
-);CREATE TABLE Tags (
+);
+
+CREATE TABLE Tags (
  tag_id INT PRIMARY KEY IDENTITY,
  tag_name VARCHAR(50) NOT NULL UNIQUE
-);CREATE TABLE MovieSeriesTags (
+);
+
+CREATE TABLE MovieSeriesTags (
  movie_series_id INT NOT NULL,
  tag_id INT NOT NULL,
  PRIMARY KEY (movie_series_id, tag_id),
  FOREIGN KEY (movie_series_id) REFERENCES
 MoviesSeries(movie_series_id) ON DELETE CASCADE,
  FOREIGN KEY (tag_id) REFERENCES Tags(tag_id) ON DELETE CASCADE
-);-- ProceduresCREATE PROCEDURE GetMovieReviews
+);
+
+-- Procedures
+CREATE PROCEDURE GetMovieReviews
  @movie_series_id INT
 AS
 BEGIN

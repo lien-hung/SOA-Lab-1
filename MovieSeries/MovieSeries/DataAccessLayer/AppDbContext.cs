@@ -14,8 +14,6 @@ namespace MovieSeries.DataAccessLayer
         { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Movie>().ToTable("MoviesSeries");
-
             modelBuilder.Entity<MovieSeriesTag>()
             .HasKey(mst => new { mst.MovieSeriesId, mst.TagId });
             modelBuilder.Entity<MovieSeriesTag>()

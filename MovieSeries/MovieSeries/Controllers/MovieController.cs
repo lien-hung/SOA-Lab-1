@@ -22,7 +22,6 @@ namespace MovieSeries.Controllers
             return Created();
         }
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMovie(int id)
         {
@@ -37,6 +36,7 @@ namespace MovieSeries.Controllers
             var movies = await _movieService.GetTopRatedMoviesWithSpAsync(count);
             return Ok(movies);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllMovies()
         {

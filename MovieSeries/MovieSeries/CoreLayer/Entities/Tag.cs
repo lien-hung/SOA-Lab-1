@@ -1,8 +1,14 @@
-﻿namespace MovieSeries.CoreLayer.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MovieSeries.CoreLayer.Entities
 {
     public class Tag
     {
-        public int id {  get; set; }
+        [Key]
+        [Column("tag_id")]
+        public int Id {  get; set; }
+        [Column("tag_name")]
         public string Name { get; set; }
         public ICollection<MovieSeriesTag> MovieSeriesTags { get; set; }
     }
