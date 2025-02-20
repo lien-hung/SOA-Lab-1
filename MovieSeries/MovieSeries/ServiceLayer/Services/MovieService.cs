@@ -22,7 +22,7 @@ namespace MovieSeries.ServiceLayer.Services
             return await _movieRepository.GetMovieByIdAsync(id);
         }
 
-        public async Task AddMovieAsync(Movie movie)
+        public async Task<Movie> AddMovieAsync(Movie movie)
         {
             var existingMovies = await _movieRepository.GetAllMoviesAsync();
             if (existingMovies.Any(m => m.Title == movie.Title))
@@ -30,6 +30,7 @@ namespace MovieSeries.ServiceLayer.Services
                 throw new ArgumentException("A movie with the same title already exists.");
             }
             await _movieRepository.AddMovieAsync(movie);
+            return movie;
         }
 
         public async Task<Movie> PutMovieAsync(int id, Movie newMovie)

@@ -19,7 +19,7 @@ namespace MovieSeries.Controllers
         public async Task<IActionResult> AddMovie(Movie movie)
         {
             await _movieService.AddMovieAsync(movie);
-            return Created();
+            return StatusCode(201, movie);
         }
 
         [HttpGet("{id}")]
@@ -35,7 +35,7 @@ namespace MovieSeries.Controllers
         {
             var result = await _movieService.PutMovieAsync(id, movie);
             if (result == null) return NotFound();
-            return Ok(result);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

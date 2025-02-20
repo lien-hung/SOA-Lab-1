@@ -17,10 +17,11 @@ namespace MovieSeries.DataAccessLayer
             return await _context.Movies.ToListAsync();
         }
 
-        public async Task AddMovieAsync(Movie movie)
+        public async Task<Movie> AddMovieAsync(Movie movie)
         {
             await _context.Movies.AddAsync(movie);
             await _context.SaveChangesAsync();
+            return movie;
         }
 
         public async Task<Movie> PutMovieAsync(int id, Movie newMovie)
