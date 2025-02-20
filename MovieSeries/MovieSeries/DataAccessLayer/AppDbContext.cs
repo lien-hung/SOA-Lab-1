@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Reflection.Emit;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieSeries.CoreLayer.Entities;
+
 namespace MovieSeries.DataAccessLayer
 {
     public class AppDbContext : DbContext
@@ -11,11 +10,9 @@ namespace MovieSeries.DataAccessLayer
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MovieSeriesTag> MovieSeriesTags { get; set; }
-        public AppDbContext(DbContextOptions<AppDbContext> options) :
-       base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
-        protected override void OnModelCreating(ModelBuilder
-       modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MovieSeriesTag>()
             .HasKey(mst => new { mst.MovieSeriesId, mst.TagId });
