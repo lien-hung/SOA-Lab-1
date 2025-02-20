@@ -15,7 +15,7 @@ namespace MovieSeries.Controllers
             _movieService = movieService;
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public async Task<IActionResult> AddMovie(Movie movie)
         {
             await _movieService.AddMovieAsync(movie);
@@ -28,6 +28,21 @@ namespace MovieSeries.Controllers
             var movie = await _movieService.GetMovieByIdAsync(id);
             if (movie == null) return NotFound();
             return Ok(movie);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutMovie(int id, Movie movie)
+        {
+            var result = await _movieService.PutMovieAsync(id, movie);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            await _movieService.DeleteMovieAsync(id);
+            return NoContent();
         }
 
         [HttpGet("top-rated/{count}")]

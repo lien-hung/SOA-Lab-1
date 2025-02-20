@@ -23,6 +23,30 @@ namespace MovieSeries.DataAccessLayer
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Movie> PutMovieAsync(int id, Movie newMovie)
+        {
+            var movie = await _context.Movies.FirstOrDefaultAsync(m => m.Id == id);
+            if (movie != null)
+            {
+                movie.Title = newMovie.Title;
+                movie.Genre = newMovie.Genre;
+                movie.ReleaseDate = newMovie.ReleaseDate;
+                movie.Description = newMovie.Description;
+            }
+            await _context.SaveChangesAsync();
+            return movie;
+        }
+
+        public async Task DeleteMovieAsync(int id)
+        {
+            var movie = await _context.Movies.FirstOrDefaultAsync(m => m.Id == id);
+            if (movie != null)
+            {
+                _context.Movies.Remove(movie);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<Movie> GetMovieByIdAsync(int id)
         {
             return await _context.Movies.FirstOrDefaultAsync(x => x.Id == id);

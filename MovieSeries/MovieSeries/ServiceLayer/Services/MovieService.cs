@@ -32,6 +32,16 @@ namespace MovieSeries.ServiceLayer.Services
             await _movieRepository.AddMovieAsync(movie);
         }
 
+        public async Task<Movie> PutMovieAsync(int id, Movie newMovie)
+        {
+            return await _movieRepository.PutMovieAsync(id, newMovie);
+        }
+
+        public async Task DeleteMovieAsync(int id)
+        {
+            await _movieRepository.DeleteMovieAsync(id);
+        }
+
         public async Task<IEnumerable<Movie>> GetTopRatedMoviesWithSpAsync(int topCount)
         {
             try
