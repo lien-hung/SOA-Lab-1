@@ -14,9 +14,7 @@ namespace MovieSeries.CoreLayer.Entities
 
         [Column("release_date")] // Kiểm tra xem SQL Server có tên này không
         public DateTime ReleaseDate { get; set; }
-
         public string Description { get; set; }
-
         public ICollection<MovieSeriesTag> MovieSeriesTags { get; set; }
     }
 }
