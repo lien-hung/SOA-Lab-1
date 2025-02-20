@@ -15,7 +15,7 @@ namespace MovieSeries.Controllers
             _movieService = movieService;
         }
 
-        [HttpPost]
+        [HttpPost("")]
         public async Task<IActionResult> AddMovie(Movie movie)
         {
             await _movieService.AddMovieAsync(movie);
