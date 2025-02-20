@@ -37,6 +37,11 @@ namespace MovieSeries.Controllers
             var movies = await _movieService.GetTopRatedMoviesWithSpAsync(count);
             return Ok(movies);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetAllMovies()
+        {
+            var movies = await _movieService.GetAllMoviesAsync();
+            return Ok(movies);
+        }
     }
 }
